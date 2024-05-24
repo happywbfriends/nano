@@ -34,7 +34,7 @@ func validate(ptrToStruct interface{}) error {
 		} else if f.Kind() == reflect.Ptr && !f.IsNil() {
 			maybeValidated = f
 		}
-		if maybeValidated.IsValid() {
+		if maybeValidated.IsValid() && maybeValidated.CanInterface() {
 			if validated, ok := maybeValidated.Interface().(IValidated); validated != nil && ok {
 				if err := validated.Validate(); err != nil {
 					return err
